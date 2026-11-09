@@ -1,11 +1,37 @@
+using App.Lab2;
+
 namespace AppTests.Lab2;
 
 public class FrequencyTests
 {
-    [TestCase("She stood up. Then she left.", new[] { "she left", "stood up", "then she", "she stood up", "then she left" })]
-    [TestCase("a b c d. b c d. e b c a d.", new[] { "a b", "b c", "c d", "e b", "a b c", "b c d", "e b c", "c a d" })]
-    public void Tests(string inputText, string[] dictionaryLines)
+    [TestCase("She stood up. Then she left.", new[]
     {
-        //TODO напишите тут свои тесты
+        "She stood", "stood up", "Then she", "she left", "She stood up", "Then she left"
+    })]
+    [TestCase("a b c d. b c d. e b c a d.", new[]
+    {
+        "a b", "b c", "c d", "e b", "a b c", "b c d", "e b c", "c a d"
+    })]
+    [TestCase("hello world", new[] { "hello world" })]
+    [TestCase("a b c a b d a b c", new[]
+    {
+        "a b", "b c", "c a", "d a", "a b c", "b c a", "c a b", "b d a", "d a b"
+    })]
+    public void NormalScenario(string inputText, string[] dictionaryLines)
+    {
+        var actual = Frequency.FrequencyAnalysis(inputText)
+            .OrderBy(kv => kv.Key.Split(' ', StringSplitOptions.RemoveEmptyEntries).Length)
+            .Select(kv => $"{kv.Key} {kv.Value}")
+            .ToArray();
+
+        Assert.That(actual, Is.EqualTo(dictionaryLines));
+    }
+    
+    [TestCase("")]
+    [TestCase("a. b. c.")]
+    public void EmptyOut(string inputText)
+    {
+        var result = Frequency.FrequencyAnalysis(inputText);
+        Assert.That(result.Count, Is.EqualTo(0));
     }
 }
