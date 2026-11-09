@@ -20,7 +20,6 @@ public class StackMachine
                 var toAdd = codeLine.Substring(5);
                 result.Append(toAdd);
             }
-
         }
         
         return result.ToString();

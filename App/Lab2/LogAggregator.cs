@@ -61,7 +61,7 @@ public class LogAggregator
                 var timeStr = logRecord.timeStamp.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
                 result.Append($"[{timeStr}] {logRecord.serviceName}:{logRecord.message}\n");
             }
-            result.Append("\n");
+            result.Append('\n');
         }
         
         return result.ToString().Trim();
