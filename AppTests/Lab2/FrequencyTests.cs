@@ -17,8 +17,7 @@ public class FrequencyTests
     {
         "a b", "b c", "c a", "d a", "a b c", "b c a", "c a b", "b d a", "d a b"
     })]
-    [TestCase("", new string[0])]
-    public void Tests(string inputText, string[] dictionaryLines)
+    public void NormalScenario(string inputText, string[] dictionaryLines)
     {
         var actual = Frequency.FrequencyAnalysis(inputText)
             .OrderBy(kv => kv.Key.Split(' ', StringSplitOptions.RemoveEmptyEntries).Length)
@@ -26,5 +25,13 @@ public class FrequencyTests
             .ToArray();
 
         Assert.That(actual, Is.EqualTo(dictionaryLines));
+    }
+    
+    [TestCase("")]
+    [TestCase("a. b. c.")]
+    public void EmptyOut(string inputText)
+    {
+        var result = Frequency.FrequencyAnalysis(inputText);
+        Assert.That(result.Count, Is.EqualTo(0));
     }
 }
