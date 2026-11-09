@@ -16,7 +16,7 @@ public class LogAggregator
             var splitted = logLine.Split(']', 3);
             if (splitted.Length != 3)
             {
-                return "";
+                return String.Empty;
             }
 
             try
@@ -38,7 +38,7 @@ public class LogAggregator
             }
             catch (IndexOutOfRangeException)
             {
-                return "";
+                return String.Empty;
             }
         }
 

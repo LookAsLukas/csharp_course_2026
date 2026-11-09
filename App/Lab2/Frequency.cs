@@ -20,10 +20,12 @@ public class Frequency
                 {
                     frequencies.Add(word, new Dictionary<string, int>());
                 }
+                
                 if (!frequencies[word].ContainsKey(nextWord))
                 {
                     frequencies[word].Add(nextWord, 0);
                 }
+                
                 frequencies[word][nextWord] += 1;
                 
                 if (i != words.Length - 2)
@@ -34,10 +36,12 @@ public class Frequency
                     {
                         frequencies.Add(digramm, new Dictionary<string, int>());
                     }
+                    
                     if (!frequencies[digramm].ContainsKey(words[i + 2]))
                     {
                         frequencies[digramm].Add(words[i + 2], 0);
                     }
+                    
                     frequencies[digramm][words[i + 2]] += 1;
                 }
             }
